@@ -19,10 +19,10 @@ public class TestBrokenLinks {
 	private record LinkRecord(String link, String visibleText) {};
 	@Test
 	public void checkBrokenLinks() {
+		System.out.println("*****This test checks for broken links*****");
 		ChromeOptions options=new ChromeOptions();
 		options.addArguments("--headless=new");
 		WebDriver driver = new ChromeDriver(options);
-		System.out.println("*****************");
 //		driver.get("https://www.eddymens.com/blog"
 //				+ "/page-with-broken-pages-for-testing-53049e870421");
 		driver.get("https://practice-automation.com/broken-links/");
