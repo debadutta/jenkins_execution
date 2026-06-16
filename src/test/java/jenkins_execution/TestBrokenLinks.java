@@ -22,6 +22,8 @@ public class TestBrokenLinks {
 		System.out.println("*****This test checks for broken links*****");
 		ChromeOptions options=new ChromeOptions();
 		options.addArguments("--headless=new");
+		options.addArguments("--no-sandbox");
+		options.addArguments("--disable-dev-shm-usage");
 		WebDriver driver = new ChromeDriver(options);
 //		driver.get("https://www.eddymens.com/blog"
 //				+ "/page-with-broken-pages-for-testing-53049e870421");
