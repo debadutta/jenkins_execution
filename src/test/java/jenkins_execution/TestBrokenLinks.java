@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestBrokenLinks {
@@ -30,6 +31,7 @@ public class TestBrokenLinks {
 		driver.get("https://practice-automation.com/broken-links/");
 		
 		List<LinkRecord> linkRecords = new ArrayList<>();
+		int brokenLinkCount=0;
 		
 		List<WebElement> listLinks = driver.findElements(By.tagName("a"));
 		for(WebElement link:listLinks) {
@@ -61,10 +63,12 @@ public class TestBrokenLinks {
 				connection.connect();
 				int responseCode = connection.getResponseCode();
 //				System.out.println(responseCode);
-				if(responseCode >= 400)
+				if(responseCode >= 400) {
 					System.out.println("Link with visible text < "+linkRecord.visibleText()+
 							" > with link < "+linkRecord.link()+" > is broken, "
 									+ "returns status code : "+responseCode);
+					brokenLinkCount++;
+				}
 				connection.disconnect();
 			} catch (IOException e) {
 				System.out.println("--EXCEPTION:" + e.getMessage());
@@ -74,6 +78,7 @@ public class TestBrokenLinks {
 			}
 			
 		}
+		Assert.assertEquals(brokenLinkCount,0);
 		driver.quit();
 	}
 
